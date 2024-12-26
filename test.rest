@@ -1,0 +1,16 @@
+GET  http://localhost:5000
+
+###
+POST http://localhost:5000/api/info
+Content-Type:application/json
+
+{
+    "information": "my name is Neelmani"
+}
+
+#####
+PUT http://localhost:5000/api/?word=james&banana=ripe
+
+###
+DELETE http://localhost:5000/delete/6/neel
+
