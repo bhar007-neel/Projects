@@ -1,0 +1,14 @@
+Hi So i making a project where I am creating a rest api using postgres , node js and express and So by i have learnt 
+
+we created a sever.js  file where we we included our node modules and and imported express so that we can use the all the required essitional components for the the api.
+we made our own port 3000 where we learnt how we can display our responses according to our request
+next up we created our own own databse in postresql where we learnt how to make a new database and then later on after creating it we entered its values like email,name,dob, and age , as we created a student database
+after creating our database we also saw in postman that how can we request the same url as in our broser and we will get the same results.
+we also created a file called db.js where we declared a instance about our database and then in that instance we gave all the information about our database like username, password, local host, port number so that our program can access it and later on we also exported than instance so that we can use it for other files as they will import them
+we also make file router.js that is that routing logic for a cleaner code , that imports the information from the file controller .js and then exports it to server.js
+whereas controller.js imports database.js that is our database file and then try to find the required results from database and shows the function how it fetches it and gives error if we are not able to fetch, but after importing the results it exports to our routes.js that will make the code cleaner and send it to server.js for results
+and talking about queries.js file it is the file made of queries that we will use to fetch different datasets form our database, we make sperater files for controller , routes , queries, because first we can make many routes and second we can also make it make our code easy to read and third it will really easy for us to look at our code when our api becomes really big and we have ton of queries, routes and different logic to fetch them in  our controller
+after making the seperate files , we do get put post delete request and make their different queries
+
+
+
