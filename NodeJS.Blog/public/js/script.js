@@ -1,0 +1,1 @@
+alert("WELCOME!!! \nDont be scared just say OK and ENJOY!!")
