@@ -207,7 +207,7 @@ img {
 
 .article-list__date {
   font-size: 1rem;
-  color: var(--gray);
+  color: var(--black);
   width: 100px;
   display: inline-block;
   width: 260px;
@@ -333,7 +333,7 @@ img {
 
 .pagination {
   font-size: 1.3rem;
-  color: var(--gray);
+  color: var(--black);
   text-decoration: none;
   margin-top: 40px;
   display: inline-block;

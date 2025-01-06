@@ -1,0 +1,45 @@
+ so we have to make a blog using Mongodvb and Node js
+
+so first we download our pakages so that we can use our Node js as backend for additional features that our Node modules provide us
+
+gitignore- files and password we ignore,so that when we push it we dont share cofidential stuff
+.env->> 
+
+**app.js** => we create a express server inside it
+              we have to config our .env file inside so that we can use it for future
+            plus inside our file we declare our port number inisde or host, plus we will give response from this fle, we will run our application from this file, because this is our main server, we also declare express inside it because our application will use express, Plus we also declare EJS template becasue we will using ejs template through our html file so that it can use embedded javascript for our program and , we set it too. So bascially when we say require that means we need it and we say app.set that means we are setting it as a middleware that we are going to use it .
+            we also gonna say that our app.use that means it will use our public folder too.we will also connect our database here, by imprting the db.js file that we set and then run our coonect databse function, becuase everytime we start we will start our database too.
+
+**Public**=>>> we have this folder so that we can have our images,CSS and   JS inside it
+
+**SERVER** => so we have learnt about the routes that we declare and in our server wer have different routes, IN our    
+              project  will declare  two files inside it that will both of our routes file
+              main file will contain the routes for main website like our home page,about,contact and so on or user realted routes and other file will be for admin routes that will contain routes for our admin, 
+              so just to convey that to our app.js we have to define that in our file that app.use('/',./server/routes), so for every routes we have to declare that our app willl use from that file and that folder, that means app.use(route,requre(_which file))
+
+
+**SERVER\admin**=>>>>>>
+
+**SERVER\main**=>>>>>> so basically we will give our responses to our this files, as these have different routes or 
+                     you can have different responses for different request, again we have to tell that we gonna use express beacuse we have to use express for our router, thats why we going to router.get for our req instead of app.get and then send our response, then at the end  we have to use mode.exports = router to export.
+                     so later on inseted of res.send=> we use res.render because we will be rendering pages now that will be our HTML pages, 
+                    later on in our routes we will declare objects and and thn we can display them like locals
+                    we make another route inside main in routes so that we add values to our database as soon as funtion runs.
+
+
+
+ **Views/Layout/main.ejs** =>>>    so this will be our main file for our project now , that will be our HTML file and give the
+                                   main layout for file, we will integerate our ejs with our HTML, connect our CSS and js.
+
+
+ **Views/Index.ejs**=>>> this page will act as our home page of our website looks like and all that information
+
+ **Views\partials\header and footer and search** =>>> to declare different formats of our page
+
+
+ // so just a side note what is happening in our application is that app.js our main file is referring to our public folders and layoutes and routes, where are our routes are declaring different objects and their information and our main ejs that uses html and acces all the info to publish it on the server
+
+
+**DATABASE** => we sign into our database and make our database and then connect
+**db.js**  =>> so this will be our database file and we wiil require moongoose and then we will connect our database that is online.
+**Post.js**=>>> import mongoose and then we make our schema for our database her and then we declare all the variables that the databe will have and then we export it and then we make another route inside main in routes so that we add values to our database as soon as funtion runs.
