@@ -1,1 +1,1 @@
-alert("WELCOME!!! \nDont be scared just say OK and ENJOY!!")
+// alert("WELCOME!!! \nDont be scared just say OK and ENJOY!!")

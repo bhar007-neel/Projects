@@ -7,12 +7,13 @@
     <title>
         <%= locals.title %>
     </title>
-    <meta name="description" content="<%=locals.description %>">
+    <meta name="description" content="<%= locals.description %>">
     <link rel="stylesheet" href="/css/style.css">
     <script type="text/javascript" defer src="/js/script.js"></script>
 </head>
 
 <body>
+    <%- include('../partials/search.ejs') %>
     <div class="container">
         <%- include('../partials/header.ejs') %>
         <main class="main">
