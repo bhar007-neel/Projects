@@ -312,6 +312,8 @@ img {
 }
 
 
+
+
 .searchBar.open {
   transform: translateY(0);
   transition: transform 0.1s;
@@ -324,9 +326,10 @@ img {
 
 #searchClose {
   position: absolute;
+  cursor: pointer;
   top: 0;
   right: 0;
-  color: var(--black);
+  color: var(--gray-light);
   padding: 15px;
 }
 

@@ -9,43 +9,46 @@ const Post = require('../models/Post');
  * HOME
  */
 
-
+// so we are declaring our home route here
 
 router.get('', async (req, res) => {
-    try {
-      const locals = {
-        title: "NodeJs Blog",
-        description: "Simple Blog created with NodeJs, Express & MongoDb."
-      }
-  
-      let perPage = 6;
-      let page = req.query.page || 1;   // basically we setting up  a page query that says we have more page then we can access it otherwise if not more than one page availabe then only one
+  try {
+    const locals = {
+      title: "NodeJs Blog",
+      description: "Simple Blog created with NodeJs, Express & MongoDb."
+    }
 
-  
-      const data = await Post.aggregate([ { $sort: { createdAt: -1 } } ])
+    let perPage = 6;
+    let page = req.query.page || 1;   // basically we setting up  a page query that says we have more page then we can access it otherwise if not more than one page availabe then only one
+
+
+    const data = await Post.aggregate([{ $sort: { createdAt: -1 } }])
       .skip(perPage * page - perPage)
       .limit(perPage)
       .exec();
-  
-      // Count is deprecated - please use countDocuments
-      // const count = await Post.count();
-      const count = await Post.countDocuments({});
-      const nextPage = parseInt(page) + 1;
-      const hasNextPage = nextPage <= Math.ceil(count / perPage);
-  
-      res.render('index', { 
-        locals,
-        data,
-        current: page,
-        nextPage: hasNextPage ? nextPage : null,
-        currentRoute: '/'
-      });
-  
-    } catch (error) {
-      console.log(error);
-    }
-  
-  });
+
+    // Count is deprecated - please use countDocuments
+    // const count = await Post.count();
+    const count = await Post.countDocuments({});
+    const nextPage = parseInt(page) + 1;
+    const hasNextPage = nextPage <= Math.ceil(count / perPage);
+
+    res.render('index', {
+      locals,
+      data,
+      current: page,
+      nextPage: hasNextPage ? nextPage : null,
+      currentRoute: '/'
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+
+});
+
+
+// this code is also valid for a home route but we declared pagination in our code therfore we used that  
 // // response to server
 // router.get('',async (req, res) => {
 //     const locals = {
@@ -70,11 +73,136 @@ router.get('', async (req, res) => {
 
 
 
-// creating an another route
+// creating an another route, we are rendering our home page here
 router.get('/about', (req, res) => {
-    res.render('about')
+  res.render('about')
 })
 module.exports = router; // exporting our response from router
+
+/*
+*GET/
+* POST:id
+*/
+
+router.get('/post/:id', async (req, res) => {
+  try {
+
+    let slug = req.params.id;
+    const data = await Post.findById({ _id: slug });
+
+    const locals = {
+      title: data.title,
+      description: "simple blog created with Nodejs,Express and Mongodb"
+    }
+
+    res.render('post', { locals, data });
+  } catch (error) {
+    console.log(error)
+  }
+  //res.render('index',{locals}); // so instead of response we use render here becasue we want to display our content on the page, we use render in terms of web dev because that means we are creating or diplaying on a web page
+
+})
+
+
+/*
+*GET/
+* POST:search term
+*/
+router.post('/search', async (req, res) => {
+  try {
+    const locals = {
+      title: "search",
+      description: "simple blog created with Nodejs,Express and Mongodb"
+    }
+    let searchTerm = req.body.searchTerm;
+    const searchNoSpecialChar =searchTerm.replace(/[^a-zA-Z0-9]/g,"")
+
+    const data = await Post.find({
+      $or: [
+        { title: { $regex: new RegExp(searchNoSpecialChar, 'i') }},
+        { body: { $regex: new RegExp(searchNoSpecialChar, 'i') }}
+      ]
+    });
+
+    res.render("search", {
+      data,
+      locals,
+      currentRoute: '/'
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+
+  //res.render('index',{locals}); // so instead of response we use render here becasue we want to display our content on the page, we use render in terms of web dev because that means we are creating or diplaying on a web page
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

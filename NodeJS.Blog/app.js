@@ -6,6 +6,10 @@ const connectDB =require('./server/config/db')
 const app = express();
 const PORT =5000 || process.env.PORT;
 app.use(express.static('public'));  // telling to use public folder for our application
+
+//to search data in our search bar
+app.use(express.urlencoded({extended: true}));
+app.use(express.json()); // while searching we will be passing our data in this form
 //conect db
 
 connectDB();
