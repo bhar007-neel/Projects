@@ -22,7 +22,7 @@ app.set('view engine','ejs') //Here, we are setting EJS as the templating engine
 
 app.use('/',(require('./server/routes/main'))) // if we have a get request for our website for home page it tell it to require from the mentioned path
 
-
+app.use('/',(require('./server/routes/admin')))
 
 app.listen(PORT,()=>{
     console.log(`App is listening on Port ${PORT}`)
