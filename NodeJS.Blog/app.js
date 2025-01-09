@@ -2,6 +2,10 @@ require('dotenv').config() //loading our environment variavbles from .env file t
 const express = require('express');
 const expressLayout = require('express-ejs-layouts') // this is the middleware helps to manage EJS (embedded javascript template),it simpifies the process of creating  layout files and allowing use to avoid repeating common Html mistakes
 const connectDB =require('./server/config/db')
+const cookieParser = require('cookie-parser');
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
+
 
 const app = express();
 const PORT =5000 || process.env.PORT;
@@ -14,6 +18,19 @@ app.use(express.json()); // while searching we will be passing our data in this 
 
 connectDB();
 
+// Adding a middleware for a cookie parser
+app.use(cookieParser());
+app.use(session({
+    secret:  'keyboard cat',
+    resave: false,
+    saveUnintialized: true,
+
+    store: MongoStore.create({
+        mongoUrl: process.env.MONOGODB_URI
+    }),
+    // cookie: {maxAge: new Date (Date.now() + (3600000))}
+    // date.now() - 30 * 24 * 60 * 60 *1000
+}))
 //Templating ENGINE // Midddleware
 app.use(expressLayout); // now we are using the EJS AS we imported it before
 app.set('layout','./layouts/main');//This line sets the default layout file to ./layouts/main.ejs. This means that any rendered view will be embedded within this main layout unless specified otherwise
