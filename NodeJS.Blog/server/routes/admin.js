@@ -136,9 +136,65 @@ router.post('/add-post',authMiddleware, async (req, res) => {
 
 });
 
+//get admin new post
+
+router.get('/edit-post/:id',authMiddleware, async (req, res) => {
+    try {
+        const locals ={
+            title: "Edit Post",
+            description: "Free NodeJs Management System"
+
+        }
+        const data= await Post.findOne({_id: req.params.id});
+
+        res.render('admin/edit-post',{
+            data,
+            layout:adminLayout,
+            locals
+        })
+        
+       
+    } catch (error) {
+        console.log(error)
+    }
+
+});
+
+
+// delete /admin/delete post
+router.delete('/delete-post/:id',authMiddleware, async (req, res) => {
+    try {
+        await Post.deleteOne({_id: req.params.id});
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.log(error)
+    }
+
+});
 
 
 
+
+
+
+//Put admin new post
+
+router.put('/edit-post/:id',authMiddleware, async (req, res) => {
+    try {
+        await Post.findByIdAndUpdate(req.params.id,{
+            title: req.body.title,
+            body: req.body.body,
+            updatedAt:Date.now()
+        });
+
+        res.redirect(`/edit-post/${req.params.id}`);
+        
+       
+    } catch (error) {
+        console.log(error)
+    }
+
+});
 
 
 
@@ -191,9 +247,13 @@ router.post('/register', async (req, res) => {
 
 
 /*
-*
+*Get/Admin- Logout
 */
-
+router.get('/logout',(req,res)=>{
+    res.clearCookie('token');
+    // res.json({message: "Logoout successful"})
+    res.redirect('/')
+})
 
 
 module.exports = router;

@@ -1,6 +1,7 @@
 require('dotenv').config() //loading our environment variavbles from .env file to store sensitive information
 const express = require('express');
 const expressLayout = require('express-ejs-layouts') // this is the middleware helps to manage EJS (embedded javascript template),it simpifies the process of creating  layout files and allowing use to avoid repeating common Html mistakes
+const methodOverride = require('method-override')
 const connectDB =require('./server/config/db')
 const cookieParser = require('cookie-parser');
 const session = require('express-session')
@@ -17,7 +18,7 @@ app.use(express.json()); // while searching we will be passing our data in this 
 //conect db
 
 connectDB();
-
+app.use(methodOverride("_method"));
 // Adding a middleware for a cookie parser
 app.use(cookieParser());
 app.use(session({
